@@ -7,7 +7,7 @@ pipeline {
 
     stages {
         // Paso 1: Usar GIT desde SCM
-        stage('Paso 1: Git Checkout') {
+        stage('Paso 1: Git') {
             steps {
                 checkout scm
             }
