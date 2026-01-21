@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'Maven' // Nombre de Maven configurado en Jenkins
+    }
+
+    stages {
+        stage('Clonar repositorio') {
+            steps {
+                git branch: 'master', url: 'https://github.com/adriianluna/CalculadoraWeb.git'
+            }
+        }
+
+        stage('Compilar proyecto') {
+            steps {
+                bat 'mvn clean package'
+            }
+        }
+
+        stage('Desplegar en Tomcat') {
+            steps {
+                // Copia el WAR generado a la carpeta compartida de Tomcat
+                bat 'copy target\\CalculadoraWeb.war C:\\VolumenDocker\\Tomcat\\CalculadoraWeb.war /Y'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '¡Build y deploy completados correctamente!'
+        }
+        failure {
+            echo 'Algo falló durante el build o deploy.'
+        }
+    }
+}
