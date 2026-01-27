@@ -5,12 +5,12 @@
 <h1>Calculadora Web</h1>
 
 <form action="HelloServlet" method="post">
-    <label>Número 2:</label>
+    <label>Número 1:</label>
     <input type="text" name="a" />
 
     <br/><br/>
 
-    <label>Número 3:</label>
+    <label>Número 2:</label>
     <input type="text" name="b" />
 
     <br/><br/>
