@@ -2,32 +2,33 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven' // Nombre igual al que puse en Tools, Maven
+    // Nombre igual al que puse en Tools, Maven
+        maven 'Maven'
     }
 
     stages {
-        // Paso 1: Usar GIT desde SCM
-        stage('Paso 1: Git') {
+        stage('Github desde SCM') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Paso 2: Compilar') {
+        stage('Compilacion') {
             steps {
                 sh 'mvn clean compile'
             }
         }
 
-        stage('Paso 3: Test') {
+        stage('Test') {
             steps {
                 sh 'mvn test'
             }
         }
 
-                stage('Paso 4: Desplegar') {
+                stage('Generamos el war') {
+
                     steps {
-                        // Generamos el archivo .war
+
                         sh 'mvn package -DskipTests'
                         sh 'cp target/*.war /var/jenkins_home/tomcat-deploy/'
                     }
